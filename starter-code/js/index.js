@@ -4,17 +4,17 @@
 function deleteItem(e){
   var content = document.getElementsByClassName('content')[0];
   var item = e.currentTarget.parentNode.parentNode;
-  var totalAmount = document.querySelector('.total-amount').innerHTML.replace('$', '');
-  var productAmount = item.children[3].children[0].innerHTML.replace('$', '');
+  var totalAmount = document.querySelector('.total-amount').innerText.replace('$', '');
+  var productAmount = item.children[3].children[0].innerText.replace('$', '');
   if (productAmount !== '0.00') {
-    document.querySelector('.total-amount').innerHTML = '$' + (totalAmount - productAmount).toFixed(2);
+    document.querySelector('.total-amount').innerText = '$' + (totalAmount - productAmount).toFixed(2);
   }
   content.removeChild(item);
 }
 
 
 function getPriceByProduct(itemNode){
-  var unitPrice = itemNode.getElementsByClassName('dollars')[0].innerHTML.replace("$", "");
+  var unitPrice = itemNode.getElementsByClassName('dollars')[0].innerText.replace("$", "");
   return unitPrice;
 }
 
@@ -23,7 +23,7 @@ function updatePriceByProduct(productPrice, index){
   var totalPrice = index.querySelector('.total');
   var quantity = index.getElementsByTagName('input')[0].value;
   var productTotal = (quantity > 0 ? quantity : 0) * productPrice;
-  totalPrice.innerHTML = "$" + productTotal.toFixed(2);
+  totalPrice.innerText = "$" + productTotal.toFixed(2);
   index.getElementsByTagName('input')[0].value = quantity > 0 ? quantity : 0;
   return productTotal;
 }
@@ -36,7 +36,7 @@ function getTotalPrice() {
   items.forEach(element => {
     totalPrice += updatePriceByProduct(getPriceByProduct(element), element);
   });
-  totalAmount.innerHTML = "$" + totalPrice.toFixed(2);
+  totalAmount.innerText = "$" + totalPrice.toFixed(2);
 }
 
 
@@ -45,7 +45,7 @@ function createName(itemName){
   name.className = 'product';
   var span = document.createElement("span");
   span.className = 'name';
-  span.innerHTML = isNaN(itemName) ? itemName : "No name provided";
+  span.innerText = isNaN(itemName) ? itemName : "No name provided";
   name.appendChild(span);
   return name;
 }
@@ -56,7 +56,7 @@ function createPrice(itemUnitPrice){
   price.className = 'price';
   var span = document.createElement("span");
   span.className = 'dollars';
-  span.innerHTML = (itemUnitPrice > 0) ? '$' + itemUnitPrice : '$0.00';
+  span.innerText = (itemUnitPrice > 0) ? '$' + itemUnitPrice : '$0.00';
   price.appendChild(span);
   return price;
 }
@@ -67,7 +67,7 @@ function createQuantityInput(){
   inputBox.className = "quantity";
   var label = document.createElement("label");
   label.className = "title-input";
-  label.innerHTML = "QTY";
+  label.innerText = "QTY";
   var input = document.createElement("input");
   input.value = 0;
   input.min = 0;
@@ -83,7 +83,7 @@ function createQuantityNode(){
   amount.className = 'amount';
   var span = document.createElement("span");
   span.className = 'total';
-  span.innerHTML = "$0.00";
+  span.innerText = "$0.00";
   amount.appendChild(span);
   return amount;
 }
@@ -94,7 +94,7 @@ function createDeleteButton(){
   buttonBox.className = 'button';
   var button = document.createElement("button");
   button.className = 'btn btn-delete';
-  button.innerHTML = "Delete";
+  button.innerText = "Delete";
   buttonBox.appendChild(button);
   return buttonBox;
 }
